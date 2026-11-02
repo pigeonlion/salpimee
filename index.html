@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONESTEP MAP - 스마트 헬스케어 & 공공체육 플랫폼</title>
+  <title>ONESTEP 플랫폼_살핌이</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,900;1,900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -12,7 +12,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.js"></script>
 
   <!-- Leaflet Routing Machine -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
@@ -113,25 +113,23 @@
       flex-direction: column;
     }
 
-    /* 1. 홈 화면 히어로 섹션 */
+    /* 홈 화면 히어로 섹션 */
     .section-hero {
-      flex: 1;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       text-align: center;
-      padding: 30px 20px 0 20px;
+      padding: 40px 20px 30px 20px;
       background: radial-gradient(circle at center, rgba(11, 107, 72, 0.08) 0%, rgba(247, 244, 239, 1) 85%);
       position: relative;
-      overflow: hidden;
     }
 
     .hero-logo-container {
-      width: clamp(160px, 18vw, 200px);
+      width: clamp(350px, 45vw, 550px);
       height: auto;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 6px 12px rgba(11, 107, 72, 0.12));
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -139,122 +137,216 @@
 
     .hero-logo-img {
       max-width: 100%;
-      height: auto;
+      max-height: 220px;
       object-fit: contain;
     }
 
     .hero-subtitle {
-      font-size: 1.05rem;
-      font-weight: 400;
+      font-size: 1.35rem;
+      font-weight: 500;
       color: var(--text-main);
-      max-width: 700px;
-      line-height: 1.5;
+      max-width: 850px;
+      line-height: 1.6;
       word-break: keep-all;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       z-index: 2;
     }
-    .hero-subtitle strong { color: var(--accent-gold); font-weight: 700; }
+    .hero-subtitle strong { color: var(--accent-gold); font-weight: 800; }
 
-    /* 홈 화면 스포츠 플레이 스테이지 무대 */
-    .sports-stage-container {
-      position: relative;
+    /* 홈 화면 하단 랜딩 섹션 (흰색 배경 영역) */
+    .landing-section {
       width: 100%;
-      max-width: 900px;
-      height: 320px;
-      margin-top: auto;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 20px 20px 0 0;
-      border: 1px solid var(--border-color);
-      border-bottom: none;
-      overflow: hidden;
-      box-shadow: inset 0 10px 20px rgba(11, 107, 72, 0.03);
+      background: #FFFFFF;
+      padding: 50px 20px 60px 20px;
+      border-top: 1px solid var(--border-color);
+    }
+    .landing-container {
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    /* 달리기 트랙 (바닥) */
-    .running-track {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 70px;
-      background: #D96B43;
-      border-top: 5px solid #FFFFFF;
+    /* 스테 & 비아 캐릭터 카드 및 전체 의미 배너 */
+    .character-white-section {
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
-      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 60px;
+      padding: 10px 0;
     }
-    .track-line {
+
+    .character-cards-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
       width: 100%;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.7);
-      border-style: dashed;
+      flex-wrap: wrap;
     }
 
-    /* 철봉 오브젝트 */
-    .stage-pullup-bar {
-      position: absolute;
-      left: 60px;
-      bottom: 70px;
-      width: 100px;
-      height: 150px;
-      border-left: 6px solid #718096;
-      border-right: 6px solid #718096;
-      border-top: 8px solid #4A5568;
-      border-radius: 4px 4px 0 0;
-    }
-
-    /* 아령 오브젝트 */
-    .stage-dumbbell-group {
-      position: absolute;
-      left: 200px;
-      bottom: 75px;
+    .character-card {
       display: flex;
-      gap: 15px;
-      align-items: flex-end;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      min-width: 280px;
+      max-width: 380px;
+      background: #F7F4EF;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 25px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      transition: var(--transition-fast);
     }
-    .dumbbell-icon {
-      font-size: 2.2rem;
+    .character-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-gold);
+      box-shadow: 0 8px 20px rgba(11, 107, 72, 0.12);
+    }
+
+    .character-card img {
+      height: 160px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    .character-name-badge {
+      display: inline-block;
+      background: var(--accent-gold);
+      color: #FFF;
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 5px 18px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .character-meaning-tag {
+      font-size: 0.85rem;
+      font-weight: bold;
       color: var(--accent-gold);
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+      margin-bottom: 8px;
+      background: rgba(11, 107, 72, 0.1);
+      padding: 3px 10px;
+      border-radius: 6px;
     }
 
-    /* 계단 오브젝트 */
-    .stage-stairs-group {
-      position: absolute;
-      right: 50px;
-      bottom: 70px;
+    .character-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .stevia-combine-banner {
+      width: 100%;
+      max-width: 790px;
+      background: linear-gradient(135deg, rgba(11, 107, 72, 0.08) 0%, rgba(247, 244, 239, 0.9) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px 25px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .stevia-combine-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      margin-bottom: 8px;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
-    .stair-step-box {
-      background: #CBD5E0;
-      border: 1px solid #A0AEC0;
-      width: 45px;
-      border-radius: 4px 4px 0 0;
-      box-shadow: inset 0 2px 4px rgba(255,255,255,0.8);
+    .stevia-combine-text {
+      font-size: 0.93rem;
+      color: var(--text-main);
+      line-height: 1.6;
+      word-break: keep-all;
     }
-    .stair-1 { height: 35px; }
-    .stair-2 { height: 70px; }
-    .stair-3 { height: 105px; }
-    .stair-4 { height: 140px; }
+    .stevia-combine-text strong {
+      color: var(--accent-gold);
+    }
 
-    /* 마우스 드래그 가능한 투명 캐릭터 아이콘 */
-    .draggable-character {
-      position: absolute;
-      width: 130px;
-      height: auto;
-      cursor: grab;
-      user-select: none;
-      z-index: 100;
-      touch-action: none;
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
-      transition: transform 0.1s ease;
+    .section-header-title {
+      text-align: center;
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+      font-weight: 800;
     }
-    .draggable-character:active {
-      cursor: grabbing;
-      transform: scale(1.05);
+    .section-header-sub {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
     }
+
+    /* 실시간 통계 카운터 바 */
+    .stats-counter-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      background: #F7F4EF;
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    .stat-number { font-size: 2.2rem; font-weight: 900; color: var(--accent-gold); margin-bottom: 4px; }
+    .stat-label { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+
+    /* 주요 특장점 그리드 */
+    .feature-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 60px;
+    }
+    .landing-card {
+      background: #FFF;
+      border: 1px solid var(--border-color);
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: var(--transition-fast);
+    }
+    .landing-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); box-shadow: 0 10px 25px rgba(11, 107, 72, 0.1); }
+    .card-icon-box {
+      width: 55px; height: 55px; background: rgba(11, 107, 72, 0.1);
+      border-radius: 12px; color: var(--accent-gold); font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .card-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; color: var(--text-main); }
+    .card-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* 공지사항 & 리뷰 피드 */
+    .info-dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .info-box { background: #F7F4EF; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
+    .info-box h3 { font-size: 1.1rem; color: var(--accent-gold); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+    .info-list { list-style: none; }
+    .info-list li { font-size: 0.9rem; padding: 8px 0; border-bottom: 1px dashed rgba(0,0,0,0.08); display: flex; justify-content: space-between; }
+
+    /* 홈페이지 푸터 (Footer) */
+    footer {
+      background: #2C3531;
+      color: #A0AEC0;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+    .footer-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-links { display: flex; gap: 15px; margin-bottom: 10px; }
+    .footer-links a { color: #FFF; text-decoration: none; font-weight: bold; }
 
     /* 공통 컴포넌트 */
     .feature-container {
@@ -386,28 +478,90 @@
       margin-bottom: 8px;
     }
 
-    /* 시계 UI */
-    .time-picker-wrapper { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; text-align: center; }
-    .time-picker-ring {
-      position: relative; width: 200px; height: 200px; border-radius: 50%; border: 10px solid #EFECE6;
-      margin: 15px auto; display: flex; align-items: center; justify-content: center; user-select: none; cursor: pointer;
+    /* 실제 아날로그 시간에 연동되는 원형 시계 UI */
+    .time-picker-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 25px;
+      text-align: center;
     }
-    .time-arc {
-      position: absolute; width: 100%; height: 100%; border-radius: 50%;
-      background: conic-gradient(from 0deg, var(--accent-gold) 0deg, var(--accent-gold) 90deg, transparent 90deg, transparent 360deg);
-      opacity: 0.8;
+    .time-inputs-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
     }
-    .time-display-text {
-      position: relative; z-index: 3; font-size: 1rem; font-weight: bold;
-      color: var(--accent-gold); background: #FFF;
-      padding: 8px 12px; border-radius: 20px; border: 1px solid var(--border-color);
+    .time-input-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .ampm-toggle-container { display: flex; justify-content: center; gap: 15px; margin-top: 15px; align-items: center; }
-    .ampm-btn-group { display: inline-flex; background: #EFECE6; border-radius: 6px; padding: 3px; border: 1px solid var(--border-color); }
-    .ampm-btn { padding: 5px 12px; border: none; background: transparent; color: var(--text-muted); font-size: 0.85rem; font-weight: bold; cursor: pointer; border-radius: 4px; }
-    .ampm-btn.active { background: var(--accent-gold); color: #FFF; }
-    .time-slider-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; font-size: 0.85rem; }
-    .time-slider-control input[type=range] { width: 130px; accent-color: var(--accent-gold); }
+    .time-input-box label {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: var(--accent-gold);
+      margin-bottom: 4px;
+    }
+    .time-input-box input[type="time"] {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--text-main);
+      background: #F7F4EF;
+      outline: none;
+    }
+
+    .interactive-clock-container {
+      position: relative;
+      width: 240px;
+      height: 240px;
+      margin: 10px auto;
+      user-select: none;
+    }
+    .clock-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .clock-face-bg {
+      fill: #F7F4EF;
+      stroke: #EFECE6;
+      stroke-width: 8;
+    }
+    .clock-tick {
+      stroke: var(--text-muted);
+      stroke-width: 1.5;
+      opacity: 0.5;
+    }
+    .clock-arc-range {
+      fill: none;
+      stroke: var(--accent-gold);
+      stroke-width: 14;
+      stroke-linecap: round;
+      transition: d 0.3s ease;
+    }
+    .clock-center-display {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+    .clock-time-text {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--accent-gold);
+    }
+    .clock-duration-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
 
     .complete-screen { display: none; text-align: center; padding: 60px 20px; }
     .complete-screen i { font-size: 4rem; color: var(--accent-gold); margin-bottom: 20px; }
@@ -475,7 +629,7 @@
       background: #FFF;
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      width: 440px;
+      width: 480px;
       max-width: 92%;
       max-height: 80vh;
       display: flex;
@@ -537,7 +691,21 @@
       display: none;
     }
 
-    .chat-messages { display: flex; flex-direction: column; gap: 10px; height: 300px; overflow-y: auto; background: #F7F4EF; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--border-color); }
+    /* 카카오톡 스타일 메시지 UI */
+    .chat-user-list { display: flex; flex-direction: column; gap: 8px; }
+    .chat-user-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px; background: #F7F4EF; border: 1px solid var(--border-color);
+      border-radius: 8px; cursor: pointer; transition: var(--transition-fast);
+    }
+    .chat-user-item:hover { background: #EFECE6; border-color: var(--accent-gold); }
+    .chat-unread-badge {
+      background: #e53e3e; color: white; border-radius: 50%;
+      width: 20px; height: 20px; font-size: 0.75rem; font-weight: bold;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .chat-messages { display: flex; flex-direction: column; gap: 10px; height: 280px; overflow-y: auto; background: #F7F4EF; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--border-color); }
     .chat-bubble { max-width: 75%; padding: 8px 12px; border-radius: 10px; font-size: 0.88rem; }
     .chat-bubble.other { background: #FFF; color: var(--text-main); align-self: flex-start; border: 1px solid var(--border-color); }
     .chat-bubble.me { background: var(--accent-gold); color: #FFF; font-weight: 500; align-self: flex-end; }
@@ -683,8 +851,13 @@
       position: relative;
       font-size: 0.85rem;
     }
-    .calendar-day:hover { border-color: var(--accent-gold); background: #EFECE6; }
-    .calendar-day.has-diary { border-color: var(--accent-gold); background: rgba(11, 107, 72, 0.08); }
+    .calendar-day.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+    .calendar-day:not(.empty):hover { border-color: var(--accent-gold); background: #EFECE6; }
+    .calendar-day.has-diary { border-color: var(--accent-gold); background: rgba(11, 107, 72, 0.08); font-weight: bold; }
     .diary-indicator {
       width: 6px;
       height: 6px;
@@ -705,9 +878,9 @@
       <i class="fa-solid fa-bars"></i>
     </div>
     
-    <!-- 상단 브랜드 로고: ONESTEP 살핌이 -->
+    <!-- 상단 브랜드 로고: ONESTEP -->
     <a href="javascript:void(0)" class="brand-logo-text-only" onclick="switchView('view-home')">
-      ONESTEP 살핌이
+      ONESTEP
     </a>
 
     <div class="sidebar-trigger" id="rightTrigger" title="설정 메뉴">
@@ -717,49 +890,139 @@
 
   <!-- 메인 컨텐츠 영역 -->
   <main>
-    <!-- 0. 홈 화면 (로고/문구 상단 배치 + 하단 드래그 가능 캐릭터 & 스포츠 무대) -->
+    <!-- 0. 홈 화면 -->
     <div id="view-home" class="view-panel active">
+      
+      <!-- 히어로 섹션 -->
       <section class="section-hero">
         <div class="hero-logo-container">
-          <img src="KakaoTalk_261020_222526.png" alt="ONESTEP 로고" class="hero-logo-img">
+          <img src="KakaoTalk_20261102_170353668.png" alt="ONESTEP 로고" class="hero-logo-img">
         </div>
 
         <p class="hero-subtitle">
-          <strong>원스텝</strong>은 직접 체험해보고, 몸으로 느끼며, 운동이 일상이 되는 <strong>첫 걸음</strong>을 만듭니다.
+          <strong>원스텝</strong>은 직접 체험해보고, 몸으로 느끼며, 운동이 일상이 되는 <strong>첫 걸음을 만듭니다.</strong>
         </p>
+      </section>
 
-        <!-- 스포츠 무대 바닥 배치 (철봉, 아령, 계단, 트랙) -->
-        <div class="sports-stage-container" id="stageContainer">
-          
-          <!-- 1. 철봉 -->
-          <div class="stage-pullup-bar"></div>
+      <!-- 랜딩 정보 섹션 (흰색 배경) -->
+      <section class="landing-section">
+        <div class="landing-container">
 
-          <!-- 2. 아령 세트 -->
-          <div class="stage-dumbbell-group">
-            <i class="fa-solid fa-dumbbell dumbbell-icon"></i>
-            <i class="fa-solid fa-dumbbell dumbbell-icon" style="font-size: 1.6rem; color: #A0AEC0;"></i>
+          <!-- 요청하신 스테 & 비아 명칭 의미 및 설탕 대체재 '스테비아' 개편 캐릭터 카드 -->
+          <div class="character-white-section">
+            
+            <div class="character-cards-wrap">
+              <div class="character-card">
+                <img src="KakaoTalk_20261030_235939396_01-removebg-preview.png" alt="스테">
+                <span class="character-name-badge">스테 (STE)</span>
+                <span class="character-meaning-tag">STEP : 첫 걸음과 도전</span>
+                <p class="character-desc">원스텝의 <strong>'STEP(발걸음)'</strong>을 상징하는 치타 마스코트입니다. 주저함 없이 목표를 향해 당차게 나아가는 끈기와 열정을 뜻합니다.</p>
+              </div>
+
+              <div class="character-card">
+                <img src="KakaoTalk_20261030_235939396-removebg-preview.png" alt="비아">
+                <span class="character-name-badge">비아 (VIA)</span>
+                <span class="character-meaning-tag">VIA : ~를 통하여</span>
+                <p class="character-desc">영단어 <strong>'VIA(~를 통해)'</strong>를 상징하는 가젤 마스코트입니다. 청소년을 운동과 연결함을 의미하며 통통 튀는 즐거움을 선사합니다.</p>
+              </div>
+            </div>
+
+            <!-- 스테 + 비아 = 스테비아 핵심 상징 안내 배너 -->
+            <div class="stevia-combine-banner">
+              <div class="stevia-combine-title">
+                <i class="fa-solid fa-leaf"></i> STE + VIA = STEVIA (스테비아)
+              </div>
+              <div class="stevia-combine-text">
+                두 마스코트가 합쳐진 <strong>'스테비아'</strong>는 <strong>"작은 스텝(STEP)을 통해(VIA) 더 먼 미래로 나아간다"</strong>는 원스텝의 핵심 가치를 담고 있습니다.<br>
+                또한 설탕을 대신하는 건강한 천연 감미료 <strong>'스테비아'</strong>처럼, 사용자의 몸과 마음을 더욱 건강하고 부담 없이 가꿔주겠다는 원스텝의 친건강 정신을 의미합니다.
+              </div>
+            </div>
+
           </div>
 
-          <!-- 3. 계단 구조물 -->
-          <div class="stage-stairs-group">
-            <div class="stair-step-box stair-1"></div>
-            <div class="stair-step-box stair-2"></div>
-            <div class="stair-step-box stair-3"></div>
-            <div class="stair-step-box stair-4"></div>
+          <h2 class="section-header-title">ONESTEP만의 청소년 운동 솔루션</h2>
+          <p class="section-header-sub">공부에 지쳐 운동과 멀어진 청소년을 건강하게 가꾸어 줄 ONESTEP</p>
+
+          <!-- 실시간 스탯 통계 바 -->
+          <div class="stats-counter-bar">
+            <div>
+              <div class="stat-number">12,450+</div>
+              <div class="stat-label">누적 운동 메이트 매칭</div>
+            </div>
+            <div>
+              <div class="stat-number">350+</div>
+              <div class="stat-label">고양시 공공체육시설 연동</div>
+            </div>
+            <div>
+              <div class="stat-number">98.4%</div>
+              <div class="stat-label">사용자 서비스 만족도</div>
+            </div>
           </div>
 
-          <!-- 4. 하단 달리기 트랙 -->
-          <div class="running-track">
-            <div class="track-line"></div>
-            <div class="track-line"></div>
+          <!-- 서비스 핵심 카드 3종 -->
+          <div class="feature-cards-grid">
+            <div class="landing-card">
+              <div class="card-icon-box"><i class="fa-solid fa-map-location-dot"></i></div>
+              <h3 class="card-title">스마트 공공체육 지도</h3>
+              <p class="card-desc">내 주변의 검증된 공공체육시설 정보를 실시간으로 확인하고 GPS 기반 최적 경로를 안내받으세요.</p>
+            </div>
+            <div class="landing-card">
+              <div class="card-icon-box"><i class="fa-solid fa-user-group"></i></div>
+              <h3 class="card-title">클린 매너 메이트 매칭</h3>
+              <p class="card-desc">10-Step 매너 평가 시스템으로 신뢰할 수 있는 운동 메이트를 찾고 1:1 메시지로 안전하게 약속을 잡으세요.</p>
+            </div>
+            <div class="landing-card">
+              <div class="card-icon-box"><i class="fa-solid fa-boxes-packing"></i></div>
+              <h3 class="card-title">원스텝의 운동 프로그램</h3>
+              <p class="card-desc">돌림이, 땡김이, 달림이 등 청소년을 위해 직접 개발한 운동 기구를 제공합니다.</p>
+            </div>
           </div>
 
-          <!-- 마우스로 움직일 수 있는 비아 및 스테 캐릭터 (투명 png 사용) -->
-          <img src="KakaoTalk_261031_000012_01-removebg-preview.png" alt="비아 캐릭터" class="draggable-character" id="charBia" style="left: 320px; bottom: 70px;">
-          <img src="KakaoTalk_261031_000012_11-removebg-preview.png" alt="스테 캐릭터" class="draggable-character" id="charSte" style="left: 70px; bottom: 70px;">
+          <!-- 공지사항 및 리뷰 Dual Grid -->
+          <div class="info-dual-grid">
+            <div class="info-box">
+              <h3><i class="fa-solid fa-bullhorn"></i> 플랫폼 최신 공지사항</h3>
+              <ul class="info-list">
+                <li><span>[안내] 2026 하반기 청소년 체력왕 챌린지 오픈</span> <small>10.28</small></li>
+                <li><span>[업데이트] 1:1 메이트 메시지 UI 업데이트</span> <small>10.25</small></li>
+                <li><span>[제휴] 고양시 어울림누리 체육시설 추가</span> <small>10.15</small></li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <h3><i class="fa-solid fa-comment-dots"></i> 생생한 이용 후기</h3>
+              <ul class="info-list">
+                <li><span>"화정동 러닝 메이트를 바로 찾아 매주 달리고 있어요!"</span> <small>김*준</small></li>
+                <li><span>"돌림이와 땡김이 덕분에 공부하면서 운동 할 수 있어서 좋아요!"</span> <small>이*연</small></li>
+                <li><span>"공공체육시설 위치랑 정보가 한번에 나와서 편해요."</span> <small>박*현</small></li>
+              </ul>
+            </div>
+          </div>
 
         </div>
       </section>
+
+      <!-- 푸터 (Footer) -->
+      <footer>
+        <div class="footer-inner">
+          <div>
+            <div class="footer-links">
+              <a href="javascript:void(0)">이용약관</a>
+              <a href="javascript:void(0)">개인정보처리방침</a>
+              <a href="javascript:void(0)">청소년보호정책</a>
+              <a href="javascript:void(0)">고객센터</a>
+            </div>
+            <p>ONESTEP | 대표: 위하윤 | 사업자등록번호: 123-45-67890</p>
+            <p>주소: 경기도 고양시 일산동구 위시티4로 112 1층 홀 | 이메일: takeastepforward@onestep.kr</p>
+            <p style="margin-top:10px; color:#718096;">© 2026 ONESTEP Healthcare Platform. All rights reserved.</p>
+          </div>
+          <div>
+            <span style="font-weight:bold; color:#FFF; display:block; margin-bottom:8px;">고객만족센터</span>
+            <span style="font-size:1.4rem; font-weight:bold; color:var(--accent-gold);">2026-1101</span>
+            <p style="font-size:0.8rem; color:#A0AEC0;">평일 09:00 ~ 18:00 (주말/공휴일 휴무)</p>
+          </div>
+        </div>
+      </footer>
+
     </div>
 
     <!-- 1. 운동 다이어리 작성 뷰 -->
@@ -801,28 +1064,44 @@
               <option value="없음">없음</option>
             </select>
           </div>
+
+          <!-- 실제 아날로그 시간에 정확히 연동되는 원형 시계 UI -->
           <div class="form-group">
-            <label>운동 진행 시간 설정</label>
+            <label>운동 시간 설정 (입력한 실제 아날로그 시간 위치가 시계에 표시됩니다)</label>
             <div class="time-picker-wrapper">
-              <div class="time-picker-ring" id="timePickerRing">
-                <div class="time-arc" id="timeArc"></div>
-                <div class="time-display-text" id="timeDisplayText">18:00 ~ 20:00 (2시간)</div>
-              </div>
-              <div class="ampm-toggle-container">
-                <span style="font-size:0.85rem; color:var(--text-muted);">시작 시간대:</span>
-                <div class="ampm-btn-group">
-                  <button type="button" class="ampm-btn" id="btnAM" onclick="setAMPM('AM')">AM (오전)</button>
-                  <button type="button" class="ampm-btn active" id="btnPM" onclick="setAMPM('PM')">PM (오후)</button>
+              
+              <div class="time-inputs-row">
+                <div class="time-input-box">
+                  <label>시작 시간</label>
+                  <input type="time" id="startTimeInput" value="14:00" onchange="updateClockFromInputs()">
+                </div>
+                <span style="font-size:1.2rem; font-weight:bold; color:var(--accent-gold); margin-top:20px;">~</span>
+                <div class="time-input-box">
+                  <label>종료 시간</label>
+                  <input type="time" id="endTimeInput" value="16:30" onchange="updateClockFromInputs()">
                 </div>
               </div>
-              <div class="time-slider-control">
-                <span>시작 시각: <strong id="startTimeLbl" style="color:var(--accent-gold)">18:00</strong></span>
-                <input type="range" id="startHourSlider" min="0" max="23" value="18" oninput="updateClockFromSliders()">
-                <span>지속: <strong id="durationLbl" style="color:var(--accent-gold)">120분</strong></span>
-                <input type="range" id="durationSlider" min="15" max="360" step="15" value="120" oninput="updateClockFromSliders()">
+
+              <div class="interactive-clock-container">
+                <svg class="clock-svg" viewBox="0 0 100 100">
+                  <circle class="clock-face-bg" cx="50" cy="50" r="38"></circle>
+                  <!-- 12, 3, 6, 9시 눈선 -->
+                  <line x1="50" y1="14" x2="50" y2="18" class="clock-tick" />
+                  <line x1="86" y1="50" x2="82" y2="50" class="clock-tick" />
+                  <line x1="50" y1="86" x2="50" y2="82" class="clock-tick" />
+                  <line x1="14" y1="50" x2="18" y2="50" class="clock-tick" />
+                  
+                  <path id="clockArcPath" class="clock-arc-range" d=""></path>
+                </svg>
+                <div class="clock-center-display">
+                  <div class="clock-time-text" id="clockTimeRangeDisplay">14:00 ~ 16:30</div>
+                  <div class="clock-duration-text" id="clockDurationDisplay">(총 2시간 30분)</div>
+                </div>
               </div>
+
             </div>
           </div>
+
           <div class="form-group">
             <label>세부 피드백 / 메모</label>
             <textarea class="form-control" id="diaryMemo" rows="4" placeholder="오늘 운동의 수행정도, 자극 부위, 컨디션 등을 자유롭게 기록하세요."></textarea>
@@ -857,6 +1136,9 @@
           </div>
           <div class="header-icon-btn" onclick="openMannerModal()" title="운동 메이트 매너 평가">
             <i class="fa-solid fa-stairs"></i>
+          </div>
+          <div class="header-icon-btn" onclick="openMyMateHistoryModal()" title="내 메이트 기록">
+            <i class="fa-solid fa-address-book"></i>
           </div>
         </div>
 
@@ -938,7 +1220,7 @@
         <div class="feature-title"><i class="fa-solid fa-calendar-days"></i> 마이페이지 - 내 다이어리</div>
         <div class="calendar-header">
           <button class="btn-outline" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-          <h3 id="calendarMonthYear" style="color:var(--accent-gold);">2026년 9월</h3>
+          <h3 id="calendarMonthYear" style="color:var(--accent-gold);"></h3>
           <button class="btn-outline" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
         <div class="calendar-grid" id="calendarGrid"></div>
@@ -951,7 +1233,7 @@
               <p id="diaryDetailContent" style="color:var(--text-muted); font-size:0.95rem;"></p>
             </div>
             <div style="background:#F7F4EF; padding:15px; border-radius:8px; border:1px solid var(--border-color);">
-              <h4 style="color:var(--text-main); margin-bottom:8px;"><i class="fa-solid fa-chart-pie"></i> 운동 습관 자료</h4>
+              <h4 style="color:var(--text-main); margin-bottom:8px;"><i class="fa-solid fa-chart-pie"></i> 운동 시간 & 세부 메모</h4>
               <p id="diaryAnalysisContent" style="color:var(--text-muted); font-size:0.95rem;"></p>
             </div>
             <div style="background:#F7F4EF; padding:15px; border-radius:8px; border:1px solid var(--border-color);">
@@ -1052,11 +1334,11 @@
           </div>
           <div class="form-group">
             <label>이름</label>
-            <input type="text" class="form-control" value="홍길동">
+            <input type="text" class="form-control" value="위하윤">
           </div>
           <div class="form-group">
             <label>이메일</label>
-            <input type="email" class="form-control" value="user@onestep.com">
+            <input type="email" class="form-control" value="takeastepforward@onestep.kr">
           </div>
           <div class="form-group">
             <label>전화번호</label>
@@ -1064,7 +1346,7 @@
           </div>
           <div class="form-group">
             <label>주소</label>
-            <input type="text" class="form-control" value="경기도 고양시 일산동구 중앙로 123">
+            <input type="text" class="form-control" value="경기도 고양시 일산동구 위시티4로 112 1층 홀">
           </div>
           <button class="btn-gold" style="width: 100%;" onclick="alert('설정이 변경되었습니다.')">변경사항 저장</button>
         </div>
@@ -1099,7 +1381,7 @@
     </div>
   </main>
 
-  <!-- 1. 알림 모달 -->
+  <!-- 알림 모달 -->
   <div class="app-modal-overlay" id="notiModal">
     <div class="app-modal-container">
       <div class="app-modal-header">
@@ -1110,28 +1392,29 @@
     </div>
   </div>
 
-  <!-- 2. DM 메시지 모달 -->
+  <!-- DM 메시지 모달 -->
   <div class="app-modal-overlay" id="dmModal">
     <div class="app-modal-container">
       <div class="app-modal-header">
-        <h3><i class="fa-solid fa-paper-plane"></i> 1:1 메시지 (수락된 메이트)</h3>
+        <h3 id="dmModalTitle"><i class="fa-solid fa-paper-plane"></i> 1:1 메시지 (메이트 대화 목록)</h3>
         <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="closeAppModal('dmModal')"></i>
       </div>
       <div class="app-modal-body">
-        <div class="form-group">
-          <label>대화 상대 선택</label>
-          <select class="form-control" id="dmTargetSelect" onchange="loadDmHistory()"></select>
-        </div>
-        <div class="chat-messages" id="dmMessageArea"></div>
-        <div style="display:flex; gap:8px;">
-          <input type="text" id="dmInput" class="form-control" placeholder="메시지를 입력하세요..." onkeyup="if(event.keyCode===13) sendDmMessage()">
-          <button class="btn-gold" onclick="sendDmMessage()">전송</button>
+        <div id="dmUserListView" class="chat-user-list"></div>
+
+        <div id="dmChatDetailView" style="display:none;">
+          <button class="btn-outline" onclick="backToDmUserList()" style="margin-bottom: 10px; padding: 4px 10px; font-size:0.8rem;"><i class="fa-solid fa-arrow-left"></i> 목록으로</button>
+          <div class="chat-messages" id="dmMessageArea"></div>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="dmInput" class="form-control" placeholder="메시지를 입력하세요..." onkeyup="if(event.keyCode===13) sendDmMessage()">
+            <button class="btn-gold" onclick="sendDmMessage()">전송</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 3. 메이트 매너 평가 모달 -->
+  <!-- 메이트 매너 평가 모달 -->
   <div class="app-modal-overlay" id="mannerModal">
     <div class="app-modal-container">
       <div class="app-modal-header">
@@ -1153,7 +1436,18 @@
     </div>
   </div>
 
-  <!-- 길찾기 커스텀 모달 -->
+  <!-- 내 메이트 기록 모달 -->
+  <div class="app-modal-overlay" id="myMateHistoryModal">
+    <div class="app-modal-container">
+      <div class="app-modal-header">
+        <h3><i class="fa-solid fa-address-book"></i> 내 메이트 기록 및 운동 내역</h3>
+        <i class="fa-solid fa-xmark" style="cursor:pointer;" onclick="closeAppModal('myMateHistoryModal')"></i>
+      </div>
+      <div class="app-modal-body" id="myMateHistoryBody"></div>
+    </div>
+  </div>
+
+  <!-- 커스텀 모달 -->
   <div id="custom-modal" class="modal-overlay">
     <div class="modal-box">
       <p id="modal-text">메시지 내용</p>
@@ -1379,77 +1673,105 @@
       }
     }
 
-    // 운동 다이어리 로직
-    let currentAMPM = 'PM';
-    function setAMPM(ampm) {
-      currentAMPM = ampm;
-      document.getElementById('btnAM').classList.toggle('active', ampm === 'AM');
-      document.getElementById('btnPM').classList.toggle('active', ampm === 'PM');
-      updateClockFromSliders();
+    /* 실제 아날로그 시간에 정확히 연동되는 원형 시계 알고리즘 */
+    function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+      const angleInRadians = angleInDegrees * Math.PI / 180.0;
+      return {
+        x: centerX + (radius * Math.cos(angleInRadians)),
+        y: centerY + (radius * Math.sin(angleInRadians))
+      };
     }
 
-    function updateClockFromSliders() {
-      let startHour = parseInt(document.getElementById('startHourSlider').value);
-      let duration = parseInt(document.getElementById('durationSlider').value);
-      let displayHour = startHour % 12 === 0 ? 12 : startHour % 12;
-      let startStr = `${currentAMPM} ${displayHour}:00`;
-      document.getElementById('startTimeLbl').innerText = startStr;
-      document.getElementById('durationLbl').innerText = `${duration}분`;
-      document.getElementById('timeDisplayText').innerText = `${startStr} 내외 (${duration}분)`;
+    function describeArc(x, y, radius, startAngle, endAngle) {
+      const start = polarToCartesian(x, y, radius, endAngle);
+      const end = polarToCartesian(x, y, radius, startAngle);
+      let diff = endAngle - startAngle;
+      if (diff < 0) diff += 360;
+      const largeArcFlag = diff <= 180 ? "0" : "1";
+      return [
+        "M", start.x, start.y,
+        "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
+      ].join(" ");
+    }
+
+    function updateClockFromInputs() {
+      const startTimeVal = document.getElementById('startTimeInput').value;
+      const endTimeVal = document.getElementById('endTimeInput').value;
+
+      if (!startTimeVal || !endTimeVal) return;
+
+      const [startH, startM] = startTimeVal.split(':').map(Number);
+      const [endH, endM] = endTimeVal.split(':').map(Number);
+
+      // 12시간제 각도 계산
+      let startTotalMins = (startH % 12) * 60 + startM;
+      let endTotalMins = (endH % 12) * 60 + endM;
+
+      let startDeg = (startTotalMins / (12 * 60)) * 360;
+      let endDeg = (endTotalMins / (12 * 60)) * 360;
+
+      let startAbs = startH * 60 + startM;
+      let endAbs = endH * 60 + endM;
+      let diffMins = endAbs - startAbs;
+
+      if (diffMins < 0) diffMins += 24 * 60;
+
+      let durH = Math.floor(diffMins / 60);
+      let durM = diffMins % 60;
+
+      const arcPath = document.getElementById('clockArcPath');
+      
+      if (diffMins >= 12 * 60) {
+        arcPath.setAttribute('d', describeArc(50, 50, 38, 0, 359.99));
+      } else if (diffMins === 0) {
+        arcPath.setAttribute('d', '');
+      } else {
+        arcPath.setAttribute('d', describeArc(50, 50, 38, startDeg, endDeg));
+      }
+
+      document.getElementById('clockTimeRangeDisplay').innerText = `${startTimeVal} ~ ${endTimeVal}`;
+      document.getElementById('clockDurationDisplay').innerText = `(총 ${durH}시간 ${durM}분)`;
     }
 
     let diaryList = [];
     function submitDiary() {
       const date = document.getElementById('diaryDate').value;
       const sport = document.getElementById('diarySport').value;
+      const mate = document.getElementById('diaryMate').value;
+      const timeStr = document.getElementById('clockTimeRangeDisplay').innerText + " " + document.getElementById('clockDurationDisplay').innerText;
+      const memo = document.getElementById('diaryMemo').value || "작성된 메모가 없습니다.";
+
       if (!date || !sport) return alert('날짜와 운동 종류를 선택해 주세요.');
-      diaryList.push({ date, sport });
+
+      diaryList.push({ date, sport, mate, timeStr, memo });
       document.getElementById('diaryForm').style.display = 'none';
       document.getElementById('diaryComplete').style.display = 'block';
+
+      const dObj = new Date(date);
+      if(!isNaN(dObj.getTime())){
+        curYear = dObj.getFullYear();
+        curMonth = dObj.getMonth();
+      }
     }
 
     function resetDiary() {
       document.getElementById('diaryForm').style.display = 'block';
       document.getElementById('diaryComplete').style.display = 'none';
+      document.getElementById('diaryMemo').value = '';
     }
 
-    // 메이트 데이터 35명
+    // 메이트 데이터
     const mateData = [
-      { name: "김민준", age: "24세", gender: "남", sport: "러닝", loc: "덕양구 성사동", manner: "9 Step", desc: "주말 아침 러닝 메이트 구합니다!" },
-      { name: "이서연", age: "22세", gender: "여", sport: "배드민턴", loc: "일산동구 백석동", manner: "8 Step", desc: "퇴근 후 랠리 위주로 치실 분 편하게 연락주세요." },
-      { name: "박도현", age: "27세", gender: "남", sport: "스쿼트", loc: "일산서구 대화동", manner: "10 Step", desc: "3대 운동 자세 상호 피드백 메이트 모집." },
-      { name: "정예은", age: "21세", gender: "여", sport: "요가", loc: "덕양구 화정동", manner: "9 Step", desc: "화정 체육센터 요가 같이 다니실 분!" },
-      { name: "최현우", age: "25세", gender: "남", sport: "축구", loc: "일산동구 중산동", manner: "7 Step", desc: "풋살 용병 및 매치 메이트 환영합니다." },
-      { name: "강지훈", age: "29세", gender: "남", sport: "싸이클", loc: "덕양구 행신동", manner: "9 Step", desc: "한강 라이딩 코스 함께 달릴 메이트 구해요." },
-      { name: "윤서윤", age: "23세", gender: "여", sport: "필라테스", loc: "일산동구 장항동", manner: "10 Step", desc: "주말 오전 필라테스 클래스 같이 가요." },
-      { name: "임하준", age: "26세", gender: "남", sport: "농구", loc: "덕양구 성사동", manner: "8 Step", desc: "어울림누리 농구장에서 3대3 하실 분!" },
-      { name: "한수아", age: "28세", gender: "여", sport: "테니스", loc: "일산서구 대화동", manner: "9 Step", desc: "대화테니스장 단식/복식 같이 치실 분." },
-      { name: "오건우", age: "30세", gender: "남", sport: "클라이밍", loc: "일산동구 백석동", manner: "10 Step", desc: "볼더링 세션 같이 하실 메이트 원해요." },
-      { name: "서지호", age: "22세", gender: "남", sport: "복싱", loc: "덕양구 화정동", manner: "8 Step", desc: "미트 파트너 구합니다!" },
-      { name: "신유나", age: "25세", gender: "여", sport: "걷기", loc: "일산동구 정발산동", manner: "9 Step", desc: "정발산공원 가벼운 산책 메이트 구해요." },
-      { name: "권우진", age: "28세", gender: "남", sport: "탁구", loc: "덕양구 주교동", manner: "8 Step", desc: "주말 핑퐁 탁구 한 게임 치실 분 연락주세요." },
-      { name: "황다은", age: "24세", gender: "여", sport: "줄넘기", loc: "일산서구 탄현동", manner: "9 Step", desc: "야외 줄넘기 및 고강도 유산소 메이트 모집!" },
-      { name: "송태민", age: "31세", gender: "남", sport: "골프", loc: "일산동구 식사동", manner: "10 Step", desc: "스크린 골프 재미있게 치실 분 모십니다." },
-      { name: "조예준", age: "23세", gender: "남", sport: "러닝", loc: "일산동구 장항동", manner: "9 Step", desc: "호수공원 야간 러닝 파트너 구해요." },
-      { name: "배아린", age: "26세", gender: "여", sport: "수영", loc: "덕양구 성사동", manner: "10 Step", desc: "꽃우물 수영장 오전 자유수영 같이 하실 분." },
-      { name: "유시우", age: "24세", gender: "남", sport: "헬스", loc: "일산서구 대화동", manner: "8 Step", desc: "대화역 근처 헬스장 파트너 운동하실 분!" },
-      { name: "백지안", age: "22세", gender: "여", sport: "배드민턴", loc: "덕양구 행신동", manner: "9 Step", desc: "행신 다목적 체육관 배드민턴 칠 분." },
-      { name: "성민경", age: "27세", gender: "여", sport: "크로스핏", loc: "일산동구 백석동", manner: "9 Step", desc: "크로스핏 파이팅 넘치게 같이 하실 분!" },
-      { name: "남궁진", age: "29세", gender: "남", sport: "족구", loc: "덕양구 화정동", manner: "8 Step", desc: "화정 족구장 자율 매치 참여자 모집합니다." },
-      { name: "노채원", age: "20세", gender: "여", sport: "인라인", loc: "일산동구 장항동", manner: "10 Step", desc: "호수공원 인라인스케이트 같이 타요!" },
-      { name: "하동현", age: "25세", gender: "남", sport: "풋살", loc: "덕양구 주교동", manner: "7 Step", desc: "주교동 풋살 용병 메이트 항시 구함." },
-      { name: "곽소율", age: "23세", gender: "여", sport: "스트레칭", loc: "일산서구 탄현동", manner: "9 Step", desc: "폼롤러 및 스트레칭 모임 함께해요." },
-      { name: "장준혁", age: "28세", gender: "남", sport: "야구", loc: "덕양구 강매동", manner: "8 Step", desc: "캐치볼 같이 하실 사회인 야구 메이트!" },
-      { name: "임수빈", age: "24세", gender: "여", sport: "볼링", loc: "일산동구 마두동", manner: "9 Step", desc: "볼링장 즐겁게 치실 분 편하게 오세요." },
-      { name: "탁성현", age: "32세", gender: "남", sport: "등산", loc: "덕양구 고양동", manner: "10 Step", desc: "주말 북한산/북한산성 등산 메이트 모집." },
-      { name: "서아윤", age: "21세", gender: "여", sport: "댄스", loc: "일산서구 주엽동", manner: "9 Step", desc: "K-POP 커버댄스 연습실 같이 써요!" },
-      { name: "문재원", age: "27세", gender: "남", sport: "검도", loc: "덕양구 화정동", manner: "8 Step", desc: "검도 호구 연습 파트너 구합니다." },
-      { name: "표지훈", age: "26세", gender: "남", sport: "주짓수", loc: "일산동구 백석동", manner: "9 Step", desc: "스파링 상호 피드백 메이트 구해요." },
-      { name: "길은서", age: "23세", gender: "여", sport: "플랭크", loc: "덕양구 행신동", manner: "10 Step", desc: "코어 운동 챌린지 같이 하실 분!" },
-      { name: "변현성", age: "29세", gender: "남", sport: "싸이클", loc: "일산서구 대화동", manner: "8 Step", desc: "자전거 로드 라이딩 메이트 환영." },
-      { name: "차유진", age: "25세", gender: "여", sport: "발레", loc: "일산동구 정발산동", manner: "9 Step", desc: "성인 발레 피트니스 함께하실 메이트." },
-      { name: "주승민", age: "28세", gender: "남", sport: "테니스", loc: "덕양구 성사동", manner: "9 Step", desc: "성사체육공원 테니스 랠리 메이트 구함." },
-      { name: "도소희", age: "22세", gender: "여", sport: "계단오르기", loc: "일산동구 백석동", manner: "10 Step", desc: "고층 계단 오르기 운동 룸메이트 모집." }
+      { name: "김민준", age: "14세", gender: "남", sport: "러닝", loc: "덕양구 성사동", manner: "9 Step", desc: "주말 아침 러닝 메이트 구합니다!" },
+      { name: "이서연", age: "18세", gender: "여", sport: "배드민턴", loc: "일산동구 백석동", manner: "8 Step", desc: "퇴근 후 랠리 위주로 치실 분 편하게 연락주세요." },
+      { name: "박도현", age: "17세", gender: "남", sport: "스쿼트", loc: "일산서구 대화동", manner: "10 Step", desc: "3대 운동 자세 상호 피드백 메이트 모집." },
+      { name: "정예은", age: "11세", gender: "여", sport: "요가", loc: "덕양구 화정동", manner: "9 Step", desc: "화정 체육센터 요가 같이 다니실 분!" },
+      { name: "최현우", age: "15세", gender: "남", sport: "축구", loc: "일산동구 중산동", manner: "7 Step", desc: "풋살 용병 및 매치 메이트 환영합니다." },
+      { name: "강지훈", age: "19세", gender: "남", sport: "싸이클", loc: "덕양구 행신동", manner: "9 Step", desc: "한강 라이딩 코스 함께 달릴 메이트 구해요." },
+      { name: "윤서윤", age: "13세", gender: "여", sport: "필라테스", loc: "일산동구 장항동", manner: "10 Step", desc: "주말 오전 필라테스 클래스 같이 가요." },
+      { name: "임하준", age: "16세", gender: "남", sport: "농구", loc: "덕양구 성사동", manner: "8 Step", desc: "어울림누리 농구장에서 3대3 하실 분!" },
+      { name: "한수아", age: "18세", gender: "여", sport: "테니스", loc: "일산서구 대화동", manner: "9 Step", desc: "대화테니스장 단식/복식 같이 치실 분." },
+      { name: "오건우", age: "17세", gender: "남", sport: "클라이밍", loc: "일산동구 백석동", manner: "10 Step", desc: "볼더링 세션 같이 하실 메이트 원해요." }
     ];
 
     function createMateCard(item) {
@@ -1477,6 +1799,7 @@
 
       document.getElementById('mateSearchResultTitle').style.display = 'none';
       document.getElementById('mateGridContainer').innerHTML = '';
+      updateMateDropdowns();
     }
 
     function searchMateBySport() {
@@ -1503,20 +1826,220 @@
       });
     }
 
-    let notiList = [{ id: 1, text: "김민준님이 러닝 메이트를 신청하셨습니다.", status: "pending", name: "김민준" }];
-    let acceptedMates = ["김민준"];
+    let notiList = [
+      { id: 1, text: "김민준님이 러닝 운동 메이트 매칭을 수락하셨습니다.", status: "accepted", name: "김민준" },
+      { id: 2, text: "이서연님이 배드민턴 운동 메이트 매칭을 수락하셨습니다.", status: "accepted", name: "이서연" }
+    ];
+    let acceptedMates = ["김민준", "이서연"];
+    let mateExerciseLogs = {
+      "김민준": [
+        { date: "2026-10-28", sport: "러닝", loc: "덕양구 어울림누리 트랙" },
+        { date: "2026-11-01", sport: "조깅 및 인터벌", loc: "화정동 공원" }
+      ],
+      "이서연": [
+        { date: "2026-10-31", sport: "배드민턴 랠리", loc: "일산 백석 체육관" }
+      ]
+    };
 
-    function applyMate(name) { alert(`${name}님에게 매칭 신청을 보냈습니다.`); }
-    function openNotiModal() { document.getElementById('notiModal').style.display = 'flex'; }
-    function openDmModal() { document.getElementById('dmModal').style.display = 'flex'; }
-    function openMannerModal() { document.getElementById('mannerModal').style.display = 'flex'; }
+    let chatHistories = {
+      "김민준": [
+        { sender: "other", text: "안녕하세요! 러닝 메이트 매칭 감사합니다." },
+        { sender: "me", text: "네 반갑습니다! 이번 주말 어울림누리 트랙에서 만나요!" }
+      ],
+      "이서연": [
+        { sender: "other", text: "안녕하세요 배드민턴 랠리 즐겁게 쳤습니다!" },
+        { sender: "me", text: "수고하셨습니다! 다음에 또 같이 쳐요." }
+      ]
+    };
+    let unreadMates = { "김민준": true, "이서연": false };
+    let currentChatMate = null;
+
+    function applyMate(name) {
+      alert(`${name}님에게 매칭 신청을 보냈습니다.`);
+      
+      if(!acceptedMates.includes(name)) {
+        acceptedMates.push(name);
+        mateExerciseLogs[name] = [
+          { date: new Date().toISOString().split('T')[0], sport: "첫 매칭 연결", loc: "위치 협의 중" }
+        ];
+        chatHistories[name] = [
+          { sender: "other", text: `안녕하세요! ${name}입니다. 매칭 신청해주셔서 감사합니다! 바로 같이 운동해요 😊` }
+        ];
+        unreadMates[name] = true;
+        notiList.unshift({
+          id: Date.now(),
+          text: `${name}님이 매칭 신청을 즉시 수락하셨습니다! (1:1 메시지 확인 가능)`,
+          status: "accepted",
+          name: name
+        });
+        document.getElementById('notiBadge').style.display = 'block';
+        updateMateDropdowns();
+      }
+    }
+
+    function updateMateDropdowns() {
+      const diaryMateSel = document.getElementById('diaryMate');
+      const mannerUserSel = document.getElementById('mannerUserSelect');
+      
+      diaryMateSel.innerHTML = '<option value="없음">없음</option>';
+      mannerUserSel.innerHTML = '';
+
+      acceptedMates.forEach(m => {
+        diaryMateSel.innerHTML += `<option value="${m}">${m}</option>`;
+        mannerUserSel.innerHTML += `<option value="${m}">${m}</option>`;
+      });
+    }
+
+    function openNotiModal() {
+      document.getElementById('notiBadge').style.display = 'none';
+      const body = document.getElementById('notiListBody');
+      body.innerHTML = '';
+      if(!notiList.length) {
+        body.innerHTML = '<p style="text-align:center; color:var(--text-muted);">도착한 알림이 없습니다.</p>';
+      } else {
+        notiList.forEach(n => {
+          body.innerHTML += `
+            <div style="background:#F7F4EF; padding:12px; border-radius:8px; margin-bottom:10px; border:1px solid var(--border-color); font-size:0.9rem;">
+              <i class="fa-solid fa-circle-check" style="color:var(--accent-gold); margin-right:6px;"></i> ${n.text}
+            </div>
+          `;
+        });
+      }
+      document.getElementById('notiModal').style.display = 'flex';
+    }
+
+    function openDmModal() {
+      renderDmUserList();
+      document.getElementById('dmUserListView').style.display = 'flex';
+      document.getElementById('dmChatDetailView').style.display = 'none';
+      document.getElementById('dmModalTitle').innerHTML = `<i class="fa-solid fa-paper-plane"></i> 1:1 메시지 (메이트 대화 목록)`;
+      document.getElementById('dmModal').style.display = 'flex';
+    }
+
+    function renderDmUserList() {
+      const container = document.getElementById('dmUserListView');
+      container.innerHTML = '';
+      if(!acceptedMates.length) {
+        container.innerHTML = '<p style="text-align:center; color:var(--text-muted); padding:20px;">연결된 수락 메이트가 없습니다.</p>';
+        return;
+      }
+      acceptedMates.forEach(m => {
+        const hasUnread = unreadMates[m];
+        const lastMsg = chatHistories[m] && chatHistories[m].length ? chatHistories[m][chatHistories[m].length - 1].text : "대화를 시작해보세요.";
+        container.innerHTML += `
+          <div class="chat-user-item" onclick="enterDmChat('${m}')">
+            <div>
+              <div style="font-weight:bold; color:var(--accent-gold); font-size:0.95rem;">${m}</div>
+              <div style="font-size:0.82rem; color:var(--text-muted); margin-top:2px; max-width:260px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">${lastMsg}</div>
+            </div>
+            ${hasUnread ? '<div class="chat-unread-badge">N</div>' : ''}
+          </div>
+        `;
+      });
+    }
+
+    function enterDmChat(mateName) {
+      currentChatMate = mateName;
+      unreadMates[mateName] = false;
+      document.getElementById('dmUserListView').style.display = 'none';
+      document.getElementById('dmChatDetailView').style.display = 'block';
+      document.getElementById('dmModalTitle').innerText = `${mateName}님과의 1:1 대화`;
+      loadDmHistory();
+    }
+
+    function backToDmUserList() {
+      currentChatMate = null;
+      renderDmUserList();
+      document.getElementById('dmUserListView').style.display = 'flex';
+      document.getElementById('dmChatDetailView').style.display = 'none';
+      document.getElementById('dmModalTitle').innerHTML = `<i class="fa-solid fa-paper-plane"></i> 1:1 메시지 (메이트 대화 목록)`;
+    }
+
+    function loadDmHistory() {
+      if(!currentChatMate) return;
+      const area = document.getElementById('dmMessageArea');
+      area.innerHTML = '';
+      const msgs = chatHistories[currentChatMate] || [];
+      msgs.forEach(m => {
+        area.innerHTML += `<div class="chat-bubble ${m.sender}">${m.text}</div>`;
+      });
+      area.scrollTop = area.scrollHeight;
+    }
+
+    function sendDmMessage() {
+      const input = document.getElementById('dmInput');
+      const txt = input.value.trim();
+      if(!txt || !currentChatMate) return;
+
+      if(!chatHistories[currentChatMate]) chatHistories[currentChatMate] = [];
+      chatHistories[currentChatMate].push({ sender: "me", text: txt });
+      input.value = '';
+      loadDmHistory();
+    }
+
+    function openMannerModal() {
+      initStairRating();
+      document.getElementById('mannerModal').style.display = 'flex';
+    }
+
+    let selectedStairVal = 8;
+    function initStairRating() {
+      const container = document.getElementById('mate10StairContainer');
+      container.innerHTML = '';
+      for(let i = 1; i <= 10; i++) {
+        const step = document.createElement('div');
+        step.className = `stair-step ${i <= selectedStairVal ? 'active' : ''}`;
+        step.style.height = `${i * 10}%`;
+        step.innerText = `${i}`;
+        step.onclick = () => {
+          selectedStairVal = i;
+          document.getElementById('mateStairValLbl').innerText = `선택 단계: ${selectedStairVal} Step`;
+          initStairRating();
+        };
+        container.appendChild(step);
+      }
+    }
+
+    function submitMannerRating() {
+      const target = document.getElementById('mannerUserSelect').value;
+      if(!target) return alert('평가할 메이트가 없습니다.');
+      alert(`${target}님에게 ${selectedStairVal} Step 매너 평가를 완료했습니다!`);
+      closeAppModal('mannerModal');
+    }
+
+    function openMyMateHistoryModal() {
+      const body = document.getElementById('myMateHistoryBody');
+      body.innerHTML = '';
+      if(!acceptedMates.length) {
+        body.innerHTML = '<p style="text-align:center; color:var(--text-muted);">함께한 운동 메이트 기록이 없습니다.</p>';
+      } else {
+        acceptedMates.forEach(m => {
+          const logs = mateExerciseLogs[m] || [];
+          let logHTML = '';
+          logs.forEach(log => {
+            logHTML += `<li style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">🗓️ <strong>${log.date}</strong> - [${log.sport}] (${log.loc})</li>`;
+          });
+
+          body.innerHTML += `
+            <div style="background:#F7F4EF; padding:15px; border-radius:10px; margin-bottom:12px; border:1px solid var(--border-color);">
+              <div style="font-weight:bold; color:var(--accent-gold); font-size:1.05rem;"><i class="fa-solid fa-user-check"></i> ${m} 메이트</div>
+              <div style="margin-top:8px; font-weight:bold; font-size:0.88rem; color:var(--text-main);">같이했던 운동 기록:</div>
+              <ul style="padding-left:18px; margin-top:4px;">
+                ${logHTML || '<li style="font-size:0.85rem; color:var(--text-muted);">기록된 운동이 없습니다.</li>'}
+              </ul>
+            </div>
+          `;
+        });
+      }
+      document.getElementById('myMateHistoryModal').style.display = 'flex';
+    }
+
     function closeAppModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    // 보내주신 이미지 파일명 3개 적용
     const buyProducts = [
-      { id: 101, type: "dolim", name: "돌림이", price: 10900, origPrice: 13000, rating: "★ 4.8", desc: "손과 팔의 피로를 완화해주는 교체형 롤러", image: "KakaoTalk_261030_233732_11.jpeg" },
-      { id: 102, type: "ttaengim", name: "땡김이", price: 7900, origPrice: 9000, rating: "★ 4.9", desc: "다리 근육을 강화시켜주는 간편한 의자 조립형 운동기구", image: "KakaoTalk_261030_233733_21.jpeg" },
-      { id: 103, type: "dalim", name: "달림이", price: 4990, rating: "★ 4.7", desc: "GPS를 기반으로한 학생 체력 증진 프로그램", isSubscription: true, image: "KakaoTalk_261030_233732_01.jpeg" },
+      { id: 101, type: "dolim", name: "돌림이", price: 10900, origPrice: 13000, rating: "★ 4.8", desc: "손과 팔의 피로를 완화해주는 교체형 롤러", image: "KakaoTalk_20261030_233620239_01.jpg" },
+      { id: 102, type: "ttaengim", name: "땡김이", price: 7900, origPrice: 9000, rating: "★ 4.9", desc: "다리 근육을 강화시켜주는 간편한 의자 조립형 운동기구", image: "KakaoTalk_20261030_233620239_02.jpg" },
+      { id: 103, type: "dalim", name: "달림이", price: 4990, rating: "★ 4.7", desc: "GPS를 기반으로한 학생 체력 증진 프로그램", isSubscription: true, image: "KakaoTalk_20261030_233620239.jpg" },
       { id: 104, type: "fabric", name: "롤러 원단 추가 구매", price: 2000, rating: "★ 4.6", desc: "돌림이 교체용 원단 (밍크, 골덴, 지압 선택 가능)", image: "" },
       { id: 105, type: "band", name: "강도별 밴드 추가 구매", price: 4500, rating: "★ 4.9", desc: "땡김이 교체용 밴드 (강도별 선택 가능)", image: "" }
     ];
@@ -1656,19 +2179,74 @@
       switchView('view-home');
     }
 
-    let curYear = 2026, curMonth = 8;
+    let curYear = 2026, curMonth = 9; // 10월
+    const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+
     function renderCalendar() {
       document.getElementById('calendarMonthYear').innerText = `${curYear}년 ${curMonth + 1}월`;
       const grid = document.getElementById('calendarGrid');
       grid.innerHTML = '';
-      for (let d = 1; d <= 30; d++) {
-        grid.innerHTML += `<div class="calendar-day">${d}</div>`;
+
+      dayNames.forEach(dn => {
+        grid.innerHTML += `<div class="calendar-day-head">${dn}</div>`;
+      });
+
+      const firstDay = new Date(curYear, curMonth, 1).getDay();
+      const lastDate = new Date(curYear, curMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        grid.innerHTML += `<div class="calendar-day empty"></div>`;
+      }
+
+      for (let d = 1; d <= lastDate; d++) {
+        const dateStr = `${curYear}-${String(curMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const hasDiary = diaryList.some(item => item.date === dateStr);
+
+        const dayEl = document.createElement('div');
+        dayEl.className = `calendar-day ${hasDiary ? 'has-diary' : ''}`;
+        dayEl.innerText = d;
+        if(hasDiary) {
+          dayEl.innerHTML += `<div class="diary-indicator"></div>`;
+        }
+        dayEl.onclick = () => showCalendarDetail(dateStr);
+        grid.appendChild(dayEl);
       }
     }
 
     function changeMonth(delta) {
       curMonth += delta;
+      if (curMonth > 11) {
+        curYear += Math.floor(curMonth / 12);
+        curMonth = curMonth % 12;
+      } else if (curMonth < 0) {
+        curYear += Math.floor(curMonth / 12);
+        curMonth = (curMonth % 12 + 12) % 12;
+      }
       renderCalendar();
+      document.getElementById('calendarDetailPanel').style.display = 'none';
+    }
+
+    function showCalendarDetail(dateStr) {
+      const panel = document.getElementById('calendarDetailPanel');
+      const title = document.getElementById('selectedDateTitle');
+      const diaryContent = document.getElementById('diaryDetailContent');
+      const analysisContent = document.getElementById('diaryAnalysisContent');
+      const mateContent = document.getElementById('diaryMateContent');
+
+      title.innerText = `📅 ${dateStr} 다이어리 기록`;
+      const matched = diaryList.filter(item => item.date === dateStr);
+
+      if (matched.length === 0) {
+        diaryContent.innerText = "이 날짜에 작성된 운동 다이어리가 없습니다.";
+        analysisContent.innerText = "기록이 없어 세부 정보를 표시할 수 없습니다.";
+        mateContent.innerText = "함께한 메이트가 없습니다.";
+      } else {
+        const lastEntry = matched[matched.length - 1];
+        diaryContent.innerText = `[운동 종목] ${lastEntry.sport}`;
+        analysisContent.innerText = `[진행 시간] ${lastEntry.timeStr}\n[세부 메모] ${lastEntry.memo}`;
+        mateContent.innerText = `[함께한 메이트] ${lastEntry.mate}`;
+      }
+      panel.style.display = 'block';
     }
 
     let cartList = [];
@@ -1706,48 +2284,6 @@
     function validateAndSignup() {
       alert('회원가입 완료!');
       toggleAuthBox('login');
-    }
-
-    /* 캐릭터 자유 마우스 드래그 앤 드롭 함수 구현 */
-    function makeCharacterDraggable(el) {
-      let isDragging = false;
-      let startX, startY, initialLeft, initialTop;
-
-      const stage = document.getElementById('stageContainer');
-
-      el.addEventListener('pointerdown', (e) => {
-        isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        initialLeft = el.offsetLeft;
-        initialTop = el.offsetTop;
-        el.setPointerCapture(e.pointerId);
-      });
-
-      el.addEventListener('pointermove', (e) => {
-        if (!isDragging) return;
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-
-        let newLeft = initialLeft + dx;
-        let newTop = initialTop + dy;
-
-        // 스테이지 영역 이탈 방지 경계 계산
-        const maxLeft = stage.clientWidth - el.clientWidth;
-        const maxTop = stage.clientHeight - el.clientHeight;
-
-        newLeft = Math.max(0, Math.min(newLeft, maxLeft));
-        newTop = Math.max(0, Math.min(newTop, maxTop));
-
-        el.style.left = newLeft + 'px';
-        el.style.top = newTop + 'px';
-        el.style.bottom = 'auto'; // 절대 위치 지정을 위한 기존 bottom 제거
-      });
-
-      el.addEventListener('pointerup', (e) => {
-        isDragging = false;
-        try { el.releasePointerCapture(e.pointerId); } catch(err) {}
-      });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -1788,11 +2324,7 @@
       });
 
       initMateMatching();
-      updateClockFromSliders();
-
-      // 캐릭터 드래그 앤 드롭 기능 등록
-      makeCharacterDraggable(document.getElementById('charBia'));
-      makeCharacterDraggable(document.getElementById('charSte'));
+      updateClockFromInputs();
     });
   </script>
 </body>
