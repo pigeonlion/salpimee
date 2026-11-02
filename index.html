@@ -382,6 +382,37 @@
     }
     .form-control:focus { border-color: var(--accent-gold); box-shadow: 0 0 0 3px rgba(11, 107, 72, 0.1); }
 
+    /* 토글 라디오 버튼 UI 커스텀 스타일 */
+    .toggle-group-wrapper {
+      display: flex;
+      background: #EFECE6;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+    }
+    .toggle-btn-option {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .toggle-btn-option.active {
+      background: var(--accent-gold);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(11, 107, 72, 0.25);
+    }
+
     .btn-gold {
       background: var(--accent-gold);
       color: #FFF;
@@ -908,7 +939,7 @@
       <section class="landing-section">
         <div class="landing-container">
 
-          <!-- 요청하신 스테 & 비아 명칭 의미 및 설탕 대체재 '스테비아' 개편 캐릭터 카드 -->
+          <!-- 스테 & 비아 명칭 의미 및 설탕 대체재 '스테비아' 개편 캐릭터 카드 -->
           <div class="character-white-section">
             
             <div class="character-cards-wrap">
@@ -1058,11 +1089,19 @@
               </optgroup>
             </select>
           </div>
+
+          <!-- 개편된 같이 운동한 메이트 [없음 / 있음] 라디오 토글 UI -->
           <div class="form-group">
             <label>같이 운동한 메이트</label>
-            <select class="form-control" id="diaryMate">
-              <option value="없음">없음</option>
-            </select>
+            <div class="toggle-group-wrapper">
+              <div class="toggle-btn-option active" id="mateOptNone" onclick="selectMateToggle('없음')">
+                <i class="fa-solid fa-user-xmark"></i> 없음 (혼자 운동)
+              </div>
+              <div class="toggle-btn-option" id="mateOptExist" onclick="selectMateToggle('있음')">
+                <i class="fa-solid fa-users"></i> 있음 (메이트 동행)
+              </div>
+            </div>
+            <input type="hidden" id="diaryMate" value="없음">
           </div>
 
           <!-- 실제 아날로그 시간에 정확히 연동되는 원형 시계 UI -->
@@ -1673,6 +1712,21 @@
       }
     }
 
+    // 메이트 선택 라디오 토글 제어 스크립트
+    function selectMateToggle(val) {
+      document.getElementById('diaryMate').value = val;
+      const noneBtn = document.getElementById('mateOptNone');
+      const existBtn = document.getElementById('mateOptExist');
+
+      if (val === '없음') {
+        noneBtn.classList.add('active');
+        existBtn.classList.remove('active');
+      } else {
+        existBtn.classList.add('active');
+        noneBtn.classList.remove('active');
+      }
+    }
+
     /* 실제 아날로그 시간에 정확히 연동되는 원형 시계 알고리즘 */
     function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
       const angleInRadians = angleInDegrees * Math.PI / 180.0;
@@ -1878,16 +1932,13 @@
     }
 
     function updateMateDropdowns() {
-      const diaryMateSel = document.getElementById('diaryMate');
       const mannerUserSel = document.getElementById('mannerUserSelect');
-      
-      diaryMateSel.innerHTML = '<option value="없음">없음</option>';
-      mannerUserSel.innerHTML = '';
-
-      acceptedMates.forEach(m => {
-        diaryMateSel.innerHTML += `<option value="${m}">${m}</option>`;
-        mannerUserSel.innerHTML += `<option value="${m}">${m}</option>`;
-      });
+      if (mannerUserSel) {
+        mannerUserSel.innerHTML = '';
+        acceptedMates.forEach(m => {
+          mannerUserSel.innerHTML += `<option value="${m}">${m}</option>`;
+        });
+      }
     }
 
     function openNotiModal() {
